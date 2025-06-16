@@ -4,6 +4,7 @@ import cz.schoolweb.dto.StudentDto;
 import cz.schoolweb.entity.StudentEntity;
 import cz.schoolweb.mapper.StudentMapper;
 import cz.schoolweb.repository.StudentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,16 @@ public class StudentService {
     //Pridavani novych studentu
     public StudentDto addStudent(StudentDto newStudentDto){
         StudentEntity studentEntity = studentMapper.toEntity(newStudentDto);
+        StudentEntity savedStudent = studentRepository.save(studentEntity);
+        return studentMapper.toDto(savedStudent);
+    }
+    //Editace studentu
+    public StudentDto editStudent(StudentDto editedStudentDto, int studentId){
+        if(!studentRepository.existsById(studentId)){
+            throw new EntityNotFoundException("Student not found");
+        }
+        StudentEntity studentEntity = studentMapper.toEntity(editedStudentDto);
+        studentEntity.setId(studentId);
         StudentEntity savedStudent = studentRepository.save(studentEntity);
         return studentMapper.toDto(savedStudent);
     }

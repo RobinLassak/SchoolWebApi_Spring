@@ -30,4 +30,9 @@ public class StudentController {
     public StudentDto addStudent(@RequestBody  StudentDto studentToAdd) {
         return studentService.addStudent(studentToAdd);
     }
+    //Editace studentu
+    @PutMapping("/students/{studentsId}")
+    public StudentDto editStudent(@PathVariable int studentsId, @RequestBody StudentDto editedStudent) {
+        return  studentService.editStudent(editedStudent, studentsId);  
+    }
 }
