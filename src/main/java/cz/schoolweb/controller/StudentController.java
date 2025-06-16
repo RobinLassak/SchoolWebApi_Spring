@@ -24,6 +24,6 @@ public class StudentController {
     //Zobrazeni vsech studentu
     @GetMapping({"/students", "/students/"})
     public List<StudentDto> getStudents() {
-        return null;
+        return studentService.getStudents();
     }
 }
