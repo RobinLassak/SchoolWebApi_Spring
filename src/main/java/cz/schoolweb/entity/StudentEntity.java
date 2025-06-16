@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity(name = "Student")
 @Getter
 @Setter
@@ -17,5 +19,5 @@ public class StudentEntity {
     private int Id;
     private String firstName;
     private String lastName;
-    private int dateOfBirth;
+    private LocalDate dateOfBirth;
 }
