@@ -6,6 +6,7 @@ import cz.schoolweb.mapper.StudentMapper;
 import cz.schoolweb.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
@@ -25,5 +26,10 @@ public class StudentController {
     @GetMapping({"/students", "/students/"})
     public List<StudentDto> getStudents() {
         return studentService.getStudents();
+    }
+    //Pridavani novych studentu
+    @PostMapping({"/students", "/students/"})
+    public StudentDto addStudent(StudentDto studentToAdd) {
+        return studentService.addStudent(studentToAdd);
     }
 }

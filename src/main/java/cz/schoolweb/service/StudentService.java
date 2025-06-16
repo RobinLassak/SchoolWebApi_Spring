@@ -20,7 +20,7 @@ public class StudentService {
         this.studentMapper = studentMapper;
         this.studentRepository = studentRepository;
     }
-    //Zobrazeni vsech studentu
+    //Zobrazeni vsech studentu - get
     public List<StudentDto> getStudents(){
         List<StudentEntity> studentEntities = studentRepository.findAll();
         List<StudentDto> studentDtos = new ArrayList<>();
@@ -28,5 +28,11 @@ public class StudentService {
             studentDtos.add(studentMapper.toDto(studentEntity));
         }
         return studentDtos;
+    }
+    //Pridavani novych studentu
+    public StudentDto addStudent(StudentDto newStudentDto){
+        StudentEntity studentEntity = studentMapper.toEntity(newStudentDto);
+        StudentEntity savedStudent = studentRepository.save(studentEntity);
+        return studentMapper.toDto(savedStudent);
     }
 }
