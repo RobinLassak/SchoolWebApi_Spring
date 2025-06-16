@@ -1,4 +1,8 @@
 package cz.schoolweb.repository;
 
-public interface StudentRepository {
+import cz.schoolweb.entity.StudentEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepository extends JpaRepository<StudentEntity, Integer> {
+    
 }
