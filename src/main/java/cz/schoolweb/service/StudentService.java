@@ -46,4 +46,11 @@ public class StudentService {
         StudentEntity savedStudent = studentRepository.save(studentEntity);
         return studentMapper.toDto(savedStudent);
     }
+    //Mazani studentu
+    public StudentDto deleteStudent(int studentId){
+        StudentEntity studentEntity = studentRepository.findById(studentId).orElseThrow(EntityNotFoundException::new);
+        StudentDto deletedStudentToReturn = studentMapper.toDto(studentEntity);
+        studentRepository.delete(studentEntity);
+        return deletedStudentToReturn;
+    }
 }

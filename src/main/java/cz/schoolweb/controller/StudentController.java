@@ -33,6 +33,11 @@ public class StudentController {
     //Editace studentu
     @PutMapping("/students/{studentsId}")
     public StudentDto editStudent(@PathVariable int studentsId, @RequestBody StudentDto editedStudent) {
-        return  studentService.editStudent(editedStudent, studentsId);  
+        return  studentService.editStudent(editedStudent, studentsId);
+    }
+    //Mazani studentu
+    @DeleteMapping("/students/{studentsId}")
+    public StudentDto deleteStudent(@PathVariable int studentsId) {
+        return studentService.deleteStudent(studentsId);
     }
 }
