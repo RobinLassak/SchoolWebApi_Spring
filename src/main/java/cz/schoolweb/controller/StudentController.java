@@ -5,10 +5,8 @@ import cz.schoolweb.entity.StudentEntity;
 import cz.schoolweb.mapper.StudentMapper;
 import cz.schoolweb.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -29,7 +27,7 @@ public class StudentController {
     }
     //Pridavani novych studentu
     @PostMapping({"/students", "/students/"})
-    public StudentDto addStudent(StudentDto studentToAdd) {
+    public StudentDto addStudent(@RequestBody  StudentDto studentToAdd) {
         return studentService.addStudent(studentToAdd);
     }
 }
