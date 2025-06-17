@@ -1,0 +1,23 @@
+package cz.schoolweb.service;
+
+import cz.schoolweb.dto.SubjectDto;
+import cz.schoolweb.entity.SubjectEntity;
+import cz.schoolweb.mapper.SubjectMapper;
+import cz.schoolweb.repository.SubjectRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+@Service
+public class SubjectService {
+    SubjectMapper subjectMapper;
+    SubjectRepository subjectRepository;
+
+    @Autowired
+    public SubjectService(SubjectMapper subjectMapper, SubjectRepository subjectRepository) {
+        this.subjectMapper = subjectMapper;
+        this.subjectRepository = subjectRepository;
+    }
+}
