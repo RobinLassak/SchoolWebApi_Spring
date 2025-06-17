@@ -1,6 +1,8 @@
 package cz.schoolweb.service;
 
+import cz.schoolweb.dto.StudentDto;
 import cz.schoolweb.dto.SubjectDto;
+import cz.schoolweb.entity.StudentEntity;
 import cz.schoolweb.entity.SubjectEntity;
 import cz.schoolweb.mapper.SubjectMapper;
 import cz.schoolweb.repository.SubjectRepository;
@@ -19,5 +21,14 @@ public class SubjectService {
     public SubjectService(SubjectMapper subjectMapper, SubjectRepository subjectRepository) {
         this.subjectMapper = subjectMapper;
         this.subjectRepository = subjectRepository;
+    }
+    //Zobrazeni vsech predmetu - get
+    public List<SubjectDto> getSubjects(){
+        List<SubjectEntity> subjectEntities = subjectRepository.findAll();
+        List<SubjectDto> subjectDtos = new ArrayList<>();
+        for(SubjectEntity subjectEntity : subjectEntities){
+            subjectDtos.add(subjectMapper.toDto(subjectEntity));
+        }
+        return subjectDtos;
     }
 }
