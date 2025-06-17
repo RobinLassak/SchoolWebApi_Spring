@@ -31,4 +31,9 @@ public class SubjectController {
     public SubjectDto addSubject(@RequestBody  SubjectDto subjectToAdd) {
         return subjectService.addSubject(subjectToAdd);
     }
+    //Editace predmetu
+    @PutMapping("/subjects/{subjectsId}")
+    public SubjectDto editSubject(@PathVariable int subjectsId, @RequestBody SubjectDto editedSubject) {
+        return  subjectService.editSubject(editedSubject, subjectsId);
+    }
 }

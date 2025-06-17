@@ -1,6 +1,5 @@
 package cz.schoolweb.service;
 
-import cz.schoolweb.dto.StudentDto;
 import cz.schoolweb.dto.SubjectDto;
 import cz.schoolweb.entity.StudentEntity;
 import cz.schoolweb.entity.SubjectEntity;
@@ -34,6 +33,16 @@ public class SubjectService {
     //Pridavani novych predmetu - post
     public SubjectDto addSubject(SubjectDto newSubjectDto){
         SubjectEntity subjectEntity = subjectMapper.toEntity(newSubjectDto);
+        SubjectEntity savedSubject = subjectRepository.save(subjectEntity);
+        return subjectMapper.toDto(savedSubject);
+    }
+    //Editace predmetu - put
+    public SubjectDto editSubject(SubjectDto editedSubjectDto, int subjectId){
+        if(!subjectRepository.existsById(subjectId)){
+            throw new EntityNotFoundException("Student not found");
+        }
+        SubjectEntity subjectEntity = subjectMapper.toEntity(editedSubjectDto);
+        subjectEntity.setId(subjectId);
         SubjectEntity savedSubject = subjectRepository.save(subjectEntity);
         return subjectMapper.toDto(savedSubject);
     }
