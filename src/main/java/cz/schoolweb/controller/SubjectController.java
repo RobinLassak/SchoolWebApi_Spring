@@ -1,5 +1,6 @@
 package cz.schoolweb.controller;
 
+import cz.schoolweb.dto.StudentDto;
 import cz.schoolweb.dto.SubjectDto;
 import cz.schoolweb.mapper.SubjectMapper;
 import cz.schoolweb.service.SubjectService;
@@ -20,9 +21,14 @@ public class SubjectController {
         this.subjectService = subjectService;
         this.subjectMapper = subjectMapper;
     }
-    //Zobrazeni vsech studentu
+    //Zobrazeni vsech predmetu
     @GetMapping({"/subjects", "/subjects/"})
     public List<SubjectDto> getSubjects() {
         return subjectService.getSubjects();
+    }
+    //Pridavani novych predmetu
+    @PostMapping({"/subjects", "/subjects/"})
+    public SubjectDto addSubject(@RequestBody  SubjectDto subjectToAdd) {
+        return subjectService.addSubject(subjectToAdd);
     }
 }

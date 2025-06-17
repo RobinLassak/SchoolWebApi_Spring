@@ -31,4 +31,10 @@ public class SubjectService {
         }
         return subjectDtos;
     }
+    //Pridavani novych predmetu - post
+    public SubjectDto addSubject(SubjectDto newSubjectDto){
+        SubjectEntity subjectEntity = subjectMapper.toEntity(newSubjectDto);
+        SubjectEntity savedSubject = subjectRepository.save(subjectEntity);
+        return subjectMapper.toDto(savedSubject);
+    }
 }
