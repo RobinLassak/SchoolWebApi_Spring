@@ -1,7 +1,6 @@
 package cz.schoolweb.service;
 
 import cz.schoolweb.dto.SubjectDto;
-import cz.schoolweb.entity.StudentEntity;
 import cz.schoolweb.entity.SubjectEntity;
 import cz.schoolweb.mapper.SubjectMapper;
 import cz.schoolweb.repository.SubjectRepository;
@@ -45,5 +44,12 @@ public class SubjectService {
         subjectEntity.setId(subjectId);
         SubjectEntity savedSubject = subjectRepository.save(subjectEntity);
         return subjectMapper.toDto(savedSubject);
+    }
+    //Mazani predmetu - delete
+    public SubjectDto deleteSubject(int subjectId) {
+        SubjectEntity subjectEntity = subjectRepository.findById(subjectId).orElseThrow(EntityNotFoundException::new);
+        SubjectDto deletedSubjectToReturn = subjectMapper.toDto(subjectEntity);
+        subjectRepository.delete(subjectEntity);
+        return deletedSubjectToReturn;
     }
 }

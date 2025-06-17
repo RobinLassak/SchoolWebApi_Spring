@@ -1,6 +1,5 @@
 package cz.schoolweb.controller;
 
-import cz.schoolweb.dto.StudentDto;
 import cz.schoolweb.dto.SubjectDto;
 import cz.schoolweb.mapper.SubjectMapper;
 import cz.schoolweb.service.SubjectService;
@@ -35,5 +34,10 @@ public class SubjectController {
     @PutMapping("/subjects/{subjectsId}")
     public SubjectDto editSubject(@PathVariable int subjectsId, @RequestBody SubjectDto editedSubject) {
         return  subjectService.editSubject(editedSubject, subjectsId);
+    }
+    //Mazani predmetu
+    @DeleteMapping("/subjects/{subjectsId}")
+    public SubjectDto deleteSubject(@PathVariable int subjectsId) {
+        return subjectService.deleteSubject(subjectsId);
     }
 }
