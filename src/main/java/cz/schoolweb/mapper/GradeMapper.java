@@ -13,6 +13,6 @@ public interface GradeMapper {
 
     @Mapping(target = "studentId", source = "student.id")
     @Mapping(target = "subjectId", source = "subject.id")
-    
+
     GradeDto toDto(GradeEntity gradeEntity);
 }
