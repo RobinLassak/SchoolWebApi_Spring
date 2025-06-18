@@ -25,6 +25,11 @@ public class GradeController {
     public List<GradeDto> getAllGrades() {
         return gradeService.getAll();
     }
+    //Zobrazeni jedne znamky
+    @GetMapping({"/grades/{gradeId}"})
+    public GradeDto getGrade(@PathVariable int gradeId) {
+        return gradeService.getGradeById(gradeId);
+    }
     //Pridavani novych znamek
     @PostMapping({"/grades", "/grades/"})
     public GradeDto addGrade(@RequestBody GradeDto gradeDto) {
@@ -39,11 +44,6 @@ public class GradeController {
     @DeleteMapping({"/grades/{gradeId}"})
     public GradeDto deleteGrade(@PathVariable int gradeId) {
         return gradeService.deleteGrade(gradeId);
-    }
-    //Zobrazeni jedne znamky
-    @GetMapping({"/grades/{gradeId}"})
-    public GradeDto getGrade(@PathVariable int gradeId) {
-        return gradeService.getGradeById(gradeId);
     }
 
 }

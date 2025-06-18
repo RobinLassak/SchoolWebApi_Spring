@@ -38,6 +38,11 @@ public class GradeService {
         }
         return gradeDtos;
     }
+    //Zobrazeni jedne znamky - get
+    public GradeDto getGradeById(int gradeId) {
+        GradeEntity grade = gradeRepository.findById(gradeId).orElseThrow(EntityExistsException::new);
+        return gradeMapper.toDto(grade);
+    }
     //Pridavani novych znamek - post
     public GradeDto addGrade(GradeDto gradeDto) {
         GradeEntity gradeToInsert = gradeMapper.toEntity(gradeDto);
@@ -61,11 +66,6 @@ public class GradeService {
         GradeDto gradeToReturn = gradeMapper.toDto(gradeToDelete);
         gradeRepository.delete(gradeToDelete);
         return gradeToReturn;
-    }
-    //Zobrazeni jedne znamky
-    public GradeDto getGradeById(int gradeId) {
-        GradeEntity grade = gradeRepository.findById(gradeId).orElseThrow(EntityExistsException::new);
-        return gradeMapper.toDto(grade);
     }
 
 }
