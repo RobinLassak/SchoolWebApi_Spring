@@ -30,4 +30,10 @@ public class GradeController {
     public GradeDto addGrade(@RequestBody GradeDto gradeDto) {
         return gradeService.addGrade(gradeDto);
     }
+    //Editace predmetu
+    @PutMapping({"/grades/{gradeId}"})
+    public GradeDto updateGrade(@RequestBody GradeDto updatedGrade, @PathVariable int gradeId) {
+        return gradeService.editGrade(gradeId, updatedGrade);
+    }
+
 }

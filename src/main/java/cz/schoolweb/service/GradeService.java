@@ -6,6 +6,7 @@ import cz.schoolweb.mapper.GradeMapper;
 import cz.schoolweb.repository.GradeRepository;
 import cz.schoolweb.repository.StudentRepository;
 import cz.schoolweb.repository.SubjectRepository;
+import jakarta.persistence.EntityExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,14 @@ public class GradeService {
         gradeToInsert.setSubject(subjectRepository.getReferenceById(gradeDto.getSubjectId()));
         GradeEntity savedGrade = gradeRepository.save(gradeToInsert);
         return gradeMapper.toDto(savedGrade);
+    }
+    //Editace znamek - put
+    public GradeDto editGrade(int gradeId, GradeDto editedGradeDto) {
+        GradeEntity editedGradeEntity = gradeRepository.findById(gradeId).orElseThrow(EntityExistsException::new);
+        editedGradeDto.setId(gradeId);
+        gradeMapper.updateGrade(editedGradeDto, editedGradeEntity);
+        editedGradeEntity.setStudent(studentRepository.getReferenceById(editedGradeDto.getStudentId()));
+        editedGradeEntity.setSubject(subjectRepository.getReferenceById(editedGradeDto.getSubjectId()));
+        return gradeMapper.toDto(gradeRepository.save(editedGradeEntity));
     }
 }
