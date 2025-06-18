@@ -40,5 +40,10 @@ public class GradeController {
     public GradeDto deleteGrade(@PathVariable int gradeId) {
         return gradeService.deleteGrade(gradeId);
     }
+    //Zobrazeni jedne znamky
+    @GetMapping({"/grades/{gradeId}"})
+    public GradeDto getGrade(@PathVariable int gradeId) {
+        return gradeService.getGradeById(gradeId);
+    }
 
 }

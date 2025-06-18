@@ -62,4 +62,10 @@ public class GradeService {
         gradeRepository.delete(gradeToDelete);
         return gradeToReturn;
     }
+    //Zobrazeni jedne znamky
+    public GradeDto getGradeById(int gradeId) {
+        GradeEntity grade = gradeRepository.findById(gradeId).orElseThrow(EntityExistsException::new);
+        return gradeMapper.toDto(grade);
+    }
+
 }
