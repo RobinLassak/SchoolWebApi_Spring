@@ -37,4 +37,12 @@ public class GradeService {
         }
         return gradeDtos;
     }
+    //Pridavani novych znamek - post
+    public GradeDto addGrade(GradeDto gradeDto) {
+        GradeEntity gradeToInsert = gradeMapper.toEntity(gradeDto);
+        gradeToInsert.setStudent(studentRepository.getReferenceById(gradeDto.getStudentId()));
+        gradeToInsert.setSubject(subjectRepository.getReferenceById(gradeDto.getSubjectId()));
+        GradeEntity savedGrade = gradeRepository.save(gradeToInsert);
+        return gradeMapper.toDto(savedGrade);
+    }
 }

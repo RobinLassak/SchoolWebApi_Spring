@@ -6,7 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {SubjectMapper.class, StudentMapper.class})
 public interface GradeMapper {
 
     GradeEntity toEntity(GradeDto gradeDto);

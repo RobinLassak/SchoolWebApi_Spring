@@ -4,9 +4,7 @@ import cz.schoolweb.dto.GradeDto;
 import cz.schoolweb.mapper.GradeMapper;
 import cz.schoolweb.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,9 @@ public class GradeController {
     public List<GradeDto> getAllGrades() {
         return gradeService.getAll();
     }
-
+    //Pridavani novych znamek
+    @PostMapping({"/grades", "/grades/"})
+    public GradeDto addGrade(@RequestBody GradeDto gradeDto) {
+        return gradeService.addGrade(gradeDto);
+    }
 }
