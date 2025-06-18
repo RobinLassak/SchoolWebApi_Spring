@@ -55,4 +55,11 @@ public class GradeService {
         editedGradeEntity.setSubject(subjectRepository.getReferenceById(editedGradeDto.getSubjectId()));
         return gradeMapper.toDto(gradeRepository.save(editedGradeEntity));
     }
+    //Smazani znamek -delete
+    public GradeDto deleteGrade(int gradeId) {
+        GradeEntity gradeToDelete = gradeRepository.findById(gradeId).orElseThrow(EntityExistsException::new);
+        GradeDto gradeToReturn = gradeMapper.toDto(gradeToDelete);
+        gradeRepository.delete(gradeToDelete);
+        return gradeToReturn;
+    }
 }

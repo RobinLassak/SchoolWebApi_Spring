@@ -35,5 +35,10 @@ public class GradeController {
     public GradeDto updateGrade(@RequestBody GradeDto updatedGrade, @PathVariable int gradeId) {
         return gradeService.editGrade(gradeId, updatedGrade);
     }
+    //Smazani predmetu
+    @DeleteMapping({"/grades/{gradeId}"})
+    public GradeDto deleteGrade(@PathVariable int gradeId) {
+        return gradeService.deleteGrade(gradeId);
+    }
 
 }
