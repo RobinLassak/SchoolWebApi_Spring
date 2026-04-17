@@ -1,73 +1,111 @@
-# React + TypeScript + Vite
+# SchoolWebApi – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Moderní React aplikace pro správu studentů, předmětů a jejich známek. Komunikuje s REST API backendem postaveným na Spring Bootu.
 
-Currently, two official plugins are available:
+## Technologie
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Technologie | Verze | Účel |
+|-------------|-------|------|
+| React | 19 | UI framework |
+| TypeScript | 6.0 | Typovaný JavaScript |
+| Vite | 8 | Build nástroj a dev server |
+| React Router | 7 | Klientské směrování |
+| TanStack Query | 5 | Správa server state, cache a synchronizace |
+| Axios | 1.x | HTTP klient pro volání REST API |
+| React Hook Form | 7 | Správa formulářů |
+| Zod | 4 | Schéma validace formulářů |
+| Tailwind CSS | 3 | Utility-first CSS framework |
+| Sonner | 2 | Toast notifikace |
+| Lucide React | 1.x | Ikonová knihovna |
 
-## React Compiler
+## Struktura projektu
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+frontend/src/
+├── App.tsx               <- root komponenta, routing, globální providery
+├── main.tsx              <- vstupní bod aplikace
+├── index.css             <- globální styly a Tailwind direktivy
+├── api/
+│   ├── client.ts         <- Axios instance (připravena pro JWT)
+│   ├── students.ts       <- CRUD funkce pro studenty
+│   ├── subjects.ts       <- CRUD funkce pro předměty
+│   └── grades.ts         <- CRUD funkce pro známky
+├── types/
+│   └── index.ts          <- sdílené TypeScript typy
+├── utils/
+│   ├── cn.ts             <- helper pro Tailwind třídy
+│   └── grade.ts          <- helper pro formátování známek
+├── components/
+│   ├── layout/           <- Layout, Sidebar
+│   ├── ui/               <- sdílené UI komponenty (Modal, FormField, ...)
+│   ├── students/         <- StudentForm
+│   ├── subjects/         <- SubjectForm
+│   └── grades/           <- GradeForm
+└── pages/
+    ├── StudentsPage.tsx
+    ├── SubjectsPage.tsx
+    └── GradesPage.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Spuštění
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Požadavky
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 18+
+- npm
+- Spuštěný backend na portu `8080`
+
+### Instalace závislostí (jednou)
+
+```bash
+npm install
 ```
+
+### Vývojový server
+
+```bash
+npm run dev
+```
+
+Aplikace je dostupná na **http://localhost:3000**
+
+Vite proxy automaticky přesměruje všechna volání `/api/*` na backend (`http://localhost:8080`).
+
+### Build pro produkci
+
+```bash
+npm run build
+```
+
+Výstup se uloží do složky `dist/`.
+
+### Náhled produkčního buildu
+
+```bash
+npm run preview
+```
+
+## Stránky aplikace
+
+| Cesta | Stránka | Popis |
+|-------|---------|-------|
+| `/students` | Studenti | Přehled a správa studentů |
+| `/subjects` | Předměty | Přehled a správa předmětů |
+| `/grades` | Známky | Přehled a správa známek |
+
+Výchozí cesta `/` přesměruje na `/students`.
+
+## Připravenost na rozšíření
+
+Axios klient v `src/api/client.ts` obsahuje připravené interceptory pro budoucí JWT autentizaci:
+
+```ts
+// Request interceptor – vložení Bearer tokenu
+// const token = localStorage.getItem('token')
+// if (token) config.headers.Authorization = `Bearer ${token}`
+
+// Response interceptor – přesměrování při 401
+// if (error.response?.status === 401) { /* redirect to login */ }
+```
+
+Po přidání přihlašování stačí odkomentovat příslušné řádky.
