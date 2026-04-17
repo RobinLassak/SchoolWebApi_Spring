@@ -3,6 +3,9 @@ backend/target/
 !backend/**/src/main/**/target/
 !backend/**/src/test/**/target/
 
+# ===== Secrets (lokální přístupy – necommitovat) =====
+secret/
+
 # ===== FRONTEND (Node / Vite / React) =====
 frontend/node_modules/
 frontend/dist/
